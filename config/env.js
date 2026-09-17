@@ -1,0 +1,22 @@
+import { config } from "dotenv";
+
+config({ path: ".env" });
+
+export const {
+    PORT,
+    NODE_ENV,
+    FRONTEND_URL,
+    DATABASE_URL,
+    DATABASE_URL_UNPOOLED,
+    GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET,
+    GOOGLE_CALLBACK_URL,
+    CLOUDINARY_API_SECRET,
+    CLOUDINARY_API_KEY,
+    CLOUDINARY_CLOUD_NAME,
+    CLOUDINARY_URL,
+    JWT_ACCESS_SECRET,
+    JWT_ACCESS_EXPIRY,
+    JWT_REFRESH_SECRET,
+    JWT_REFRESH_EXPIRY,
+} = process.env;
