@@ -9,6 +9,10 @@ import { configurePassport } from "./config/passport.js";
 import { verifyDatabaseConnection } from "./database/neon.js";
 import authRouter from "./routes/auth.routes.js";
 import newsRouter from "./routes/news.routes.js";
+import podcastRouter from "./routes/podcast.routes.js";
+import portfolioRouter from "./routes/portfolio.routes.js";
+import contactRouter from "./routes/contact.routes.js";
+import quoteRouter from "./routes/quote.routes.js";
 import { errorHandler, notFoundHandler } from "./middlewares/error.middlewares.js";
 
 const app = express();
@@ -27,6 +31,10 @@ app.use(passport.initialize());
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/news", newsRouter);
+app.use("/api/v1/podcasts", podcastRouter);
+app.use("/api/v1/portfolio", portfolioRouter);
+app.use("/api/v1/contact", contactRouter);
+app.use("/api/v1/quote", quoteRouter);
 
 app.get("/", (req, res) => {
     return res.json({

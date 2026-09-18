@@ -39,3 +39,48 @@ export function passwordResetEmail({ resetUrl }) {
         `),
     };
 }
+
+export function contactNotificationEmail({ name, email, service, message }) {
+    return {
+        subject: `New contact inquiry from ${name}`,
+        text: `Name: ${name}\nEmail: ${email}\nService: ${service}\n\n${message}`,
+        html: shell("New contact inquiry", `
+        <p style="font-size:16px;line-height:1.6;"><strong>Name:</strong> ${name}</p>
+        <p style="font-size:16px;line-height:1.6;"><strong>Email:</strong> ${email}</p>
+        <p style="font-size:16px;line-height:1.6;"><strong>Service:</strong> ${service}</p>
+        <div style="margin-top:24px;padding:20px;background:#f5f4f0;font-size:16px;line-height:1.6;white-space:pre-wrap;">${message}</div>
+      `),
+    };
+}
+
+export function quoteNotificationEmail({ name, company, email, phone, service, budget, projectDate, location, brief, referral }) {
+    return {
+        subject: `New quote request from ${name}`,
+        text: [
+            `Name: ${name}`,
+            `Company: ${company || "Not provided"}`,
+            `Email: ${email}`,
+            `Phone: ${phone || "Not provided"}`,
+            `Service: ${service}`,
+            `Budget: ${budget || "Not provided"}`,
+            `Preferred date: ${projectDate || "Not provided"}`,
+            `Location: ${location || "Not provided"}`,
+            `Referral: ${referral || "Not provided"}`,
+            "",
+            "Project brief:",
+            brief,
+        ].join("\n"),
+        html: shell("New quote request", `
+          <p style="font-size:16px;line-height:1.6;"><strong>Name:</strong> ${name}</p>
+          <p style="font-size:16px;line-height:1.6;"><strong>Company:</strong> ${company || "Not provided"}</p>
+          <p style="font-size:16px;line-height:1.6;"><strong>Email:</strong> ${email}</p>
+          <p style="font-size:16px;line-height:1.6;"><strong>Phone:</strong> ${phone || "Not provided"}</p>
+          <p style="font-size:16px;line-height:1.6;"><strong>Service:</strong> ${service}</p>
+          <p style="font-size:16px;line-height:1.6;"><strong>Budget:</strong> ${budget || "Not provided"}</p>
+          <p style="font-size:16px;line-height:1.6;"><strong>Preferred date:</strong> ${projectDate || "Not provided"}</p>
+          <p style="font-size:16px;line-height:1.6;"><strong>Location:</strong> ${location || "Not provided"}</p>
+          <p style="font-size:16px;line-height:1.6;"><strong>Referral:</strong> ${referral || "Not provided"}</p>
+          <div style="margin-top:24px;padding:20px;background:#f5f4f0;font-size:16px;line-height:1.6;white-space:pre-wrap;"><strong>Project brief</strong><br />${brief}</div>
+        `),
+    };
+}
