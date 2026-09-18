@@ -19,4 +19,6 @@ export const {
     JWT_ACCESS_EXPIRY,
     JWT_REFRESH_SECRET,
     JWT_REFRESH_EXPIRY,
+    RESEND_API_KEY,
+    EMAIL_FROM,
 } = process.env;
