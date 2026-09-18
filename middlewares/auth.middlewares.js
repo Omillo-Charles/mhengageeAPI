@@ -26,3 +26,13 @@ export function requireAuth(req, res, next) {
         return next(new AppError("Access token is invalid or expired", 401, "INVALID_ACCESS_TOKEN"));
     }
 }
+
+export function requireAdmin(req, res, next) {
+    return requireAuth(req, res, () => {
+        if (req.auth.role !== "ADMIN") {
+            return next(new AppError("Admin access is required", 403, "FORBIDDEN"));
+        }
+
+        return next();
+    });
+}

@@ -21,4 +21,6 @@ export const {
     JWT_REFRESH_EXPIRY,
     RESEND_API_KEY,
     EMAIL_FROM,
+    UPSTASH_REDIS_REST_URL,
+    UPSTASH_REDIS_REST_TOKEN
 } = process.env;

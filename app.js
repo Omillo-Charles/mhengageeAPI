@@ -8,6 +8,7 @@ import { PORT, FRONTEND_URL } from "./config/env.js";
 import { configurePassport } from "./config/passport.js";
 import { verifyDatabaseConnection } from "./database/neon.js";
 import authRouter from "./routes/auth.routes.js";
+import newsRouter from "./routes/news.routes.js";
 import { errorHandler, notFoundHandler } from "./middlewares/error.middlewares.js";
 
 const app = express();
@@ -25,6 +26,7 @@ app.use(cookieParser());
 app.use(passport.initialize());
 
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/news", newsRouter);
 
 app.get("/", (req, res) => {
     return res.json({
