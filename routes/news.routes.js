@@ -1,16 +1,12 @@
 import { Router } from "express";
-import { createNews, deleteNews, getNewsBySlug, listNews, updateNews } from "../controllers/news.controllers.js";
-import { requireAdmin } from "../middlewares/auth.middlewares.js";
+import { getNewsBySlug, listNews, listTrendingNews } from "../controllers/news.controllers.js";
 import { cacheResponse } from "../middlewares/cache.middlewares.js";
-import { createNewsSchema, newsQuerySchema, updateNewsSchema, validate } from "../middlewares/validation.middlewares.js";
-import { upload } from "../config/cloudinary.js";
+import { newsQuerySchema, trendingNewsQuerySchema, validate } from "../middlewares/validation.middlewares.js";
 
 const newsRouter = Router();
 
+newsRouter.get("/trending", validate(trendingNewsQuerySchema, "query"), cacheResponse(300), listTrendingNews);
 newsRouter.get("/", validate(newsQuerySchema, "query"), cacheResponse(60), listNews);
 newsRouter.get("/:slug", cacheResponse(60), getNewsBySlug);
-newsRouter.post("/", requireAdmin, upload.single("coverImage"), validate(createNewsSchema), createNews);
-newsRouter.patch("/:id", requireAdmin, upload.single("coverImage"), validate(updateNewsSchema), updateNews);
-newsRouter.delete("/:id", requireAdmin, deleteNews);
 
 export default newsRouter;

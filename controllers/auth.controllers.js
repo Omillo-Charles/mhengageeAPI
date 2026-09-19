@@ -237,7 +237,8 @@ export async function googleCallback(req, res) {
     await persistRefreshToken(req.user.id, tokens.refreshToken, tokens.familyId);
     setAuthCookies(res, tokens);
 
-    return res.json({ user: publicUser(req.user) });
+    const destination = req.user.role === "ADMIN" ? "/admin" : "/";
+    return res.redirect(`${FRONTEND_URL || "http://localhost:3000"}${destination}`);
 }
 
 export async function refresh(req, res) {

@@ -19,7 +19,7 @@ function publicPortfolio(item) {
 }
 
 export async function listPortfolio(req, res) {
-    const { featured, page, limit } = req.query;
+    const { featured, page, limit } = req.validatedQuery;
     const where = {
         ...publicWhere,
         ...(featured ? { isFeatured: featured === "true" } : {}),

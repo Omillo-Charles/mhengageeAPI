@@ -13,6 +13,7 @@ import podcastRouter from "./routes/podcast.routes.js";
 import portfolioRouter from "./routes/portfolio.routes.js";
 import contactRouter from "./routes/contact.routes.js";
 import quoteRouter from "./routes/quote.routes.js";
+import podcastFeatureRouter from "./routes/podcast-feature.routes.js";
 import { errorHandler, notFoundHandler } from "./middlewares/error.middlewares.js";
 
 const app = express();
@@ -35,6 +36,7 @@ app.use("/api/v1/podcasts", podcastRouter);
 app.use("/api/v1/portfolio", portfolioRouter);
 app.use("/api/v1/contact", contactRouter);
 app.use("/api/v1/quote", quoteRouter);
+app.use("/api/v1/podcast-feature-requests", podcastFeatureRouter);
 
 app.get("/", (req, res) => {
     return res.json({

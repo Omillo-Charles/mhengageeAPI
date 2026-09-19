@@ -84,3 +84,16 @@ export function quoteNotificationEmail({ name, company, email, phone, service, b
         `),
     };
 }
+
+export function podcastFeatureRequestEmail({ name, email, topic, message }) {
+    return {
+        subject: `Podcast feature request from ${name}`,
+        text: `Name: ${name}\nEmail: ${email}\nTopic: ${topic}\n\n${message}`,
+        html: shell("Podcast feature request", `
+        <p style="font-size:16px;line-height:1.6;"><strong>Name:</strong> ${name}</p>
+        <p style="font-size:16px;line-height:1.6;"><strong>Email:</strong> ${email}</p>
+        <p style="font-size:16px;line-height:1.6;"><strong>Topic:</strong> ${topic}</p>
+        <div style="margin-top:24px;padding:20px;background:#f5f4f0;font-size:16px;line-height:1.6;white-space:pre-wrap;">${message}</div>
+      `),
+    };
+}

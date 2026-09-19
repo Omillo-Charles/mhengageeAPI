@@ -7,7 +7,7 @@ const redis = UPSTASH_REDIS_REST_URL && UPSTASH_REDIS_REST_TOKEN
     : null;
 
 function cacheKey(req) {
-    return `cache:${req.originalUrl}`;
+    return `cache:v3:${req.originalUrl}`;
 }
 
 export function cacheResponse(ttlSeconds = 60) {
@@ -24,7 +24,9 @@ export function cacheResponse(ttlSeconds = 60) {
 
             const originalJson = res.json.bind(res);
             res.json = (body) => {
-                void storeCache(key, body, ttlSeconds);
+                if (res.statusCode >= 200 && res.statusCode < 300) {
+                    void storeCache(key, body, ttlSeconds);
+                }
                 res.set("X-Cache", "MISS");
                 return originalJson(body);
             };

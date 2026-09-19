@@ -28,8 +28,10 @@ export function requireAuth(req, res, next) {
 }
 
 export function requireAdmin(req, res, next) {
-    return requireAuth(req, res, () => {
-        if (req.auth.role !== "ADMIN") {
+    return requireAuth(req, res, (error) => {
+        if (error) return next(error);
+
+        if (!req.auth || req.auth.role !== "ADMIN") {
             return next(new AppError("Admin access is required", 403, "FORBIDDEN"));
         }
 
