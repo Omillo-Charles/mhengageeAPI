@@ -18,10 +18,17 @@ import { errorHandler, notFoundHandler } from "./middlewares/error.middlewares.j
 
 const app = express();
 
+const allowedOrigins = [
+    FRONTEND_URL,
+    "http://localhost:3000",
+    "https://mhengagee.co.ke",
+    "https://www.mhengagee.co.ke",
+].filter(Boolean);
+
 configurePassport(passport);
 
 app.use(helmet());
-app.use(cors({ origin: FRONTEND_URL || "http://localhost:3000", credentials: true }));
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({
