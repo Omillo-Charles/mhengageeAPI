@@ -29,4 +29,4 @@ export const {
     NEWSAPI_API_KEY,
 } = process.env;
 
-export const YOUTUBE_KEY = YOUTUBE_API_KEY || process.env["YOUTUBE-API_KEY"];
+export const YOUTUBE_KEY = YOUTUBE_API_KEY;
